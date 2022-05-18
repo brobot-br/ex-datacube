@@ -2,7 +2,7 @@ defmodule ExDatacube.MixProject do
   @moduledoc false
 
   use Mix.Project
-  
+
   @name "ExDatacube"
   @version "0.1.0"
   @repo_url "https://github.com/y86/ex-datacube"
@@ -49,6 +49,7 @@ defmodule ExDatacube.MixProject do
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
       {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.27", only: :dev, runtime: false},
     ]
   end
 
