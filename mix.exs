@@ -4,7 +4,7 @@ defmodule ExDatacube.MixProject do
   use Mix.Project
 
   @name "ExDatacube"
-  @version "0.1.0"
+  @version "0.2.0"
   @repo_url "https://github.com/y86/ex-datacube"
 
   def project do
@@ -12,7 +12,7 @@ defmodule ExDatacube.MixProject do
       app: :ex_datacube,
       version: @version,
       elixir: "~> 1.13",
-      description: "DataCube api client",
+      description: "Cliente API DataCube",
       package: package(),
       docs: docs(),
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -26,7 +26,8 @@ defmodule ExDatacube.MixProject do
         plt_file: {:no_warn, "priv/plts/dialyzer.plt"},
         flags: [:error_handling, :race_conditions, :unknown],
         # Error out when an ignore rule is no longer useful so we can remove it
-        list_unused_filters: true
+        list_unused_filters: true,
+        plt_add_apps: [:jason]
       ]
     ]
   end
@@ -38,18 +39,21 @@ defmodule ExDatacube.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger]
+      extra_applications: [:logger],
+      mod: {ExDatacube.Application, []}
     ]
   end
 
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
+      {:finch, "~> 0.12"},
+      {:ecto, "~> 3.8"},
+
+      ## Dev tools
       {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
-      {:ex_doc, "~> 0.27", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.27", only: :dev, runtime: false}
     ]
   end
 
@@ -65,9 +69,42 @@ defmodule ExDatacube.MixProject do
       logo: "assets/datacube.png",
       source_ref: "v#{@version}",
       source_url: @repo_url,
-      main: @name
+      main: @name,
+      groups_for_functions: [
+        group_for_function("API Veículos"),
+        group_for_function("API CNH"),
+        group_for_function("API Cadastros")
+      ],
+      groups_for_modules: [
+        APIs: [
+          ExDatacube.Veiculos,
+          ExDatacube.CNH,
+          ExDatacube.Cadastros
+        ],
+        "Tipos Veículos": [
+          ExDatacube.Veiculos.Veiculo,
+          ExDatacube.Veiculos.Veiculo.Ano,
+          ExDatacube.Veiculos.Veiculo.Boolean,
+          ExDatacube.Veiculos.Veiculo.UF,
+          ExDatacube.Veiculos.Veiculo.Renavam,
+          ExDatacube.Veiculos.Veiculo.FipePossivel,
+          ExDatacube.Veiculos.Veiculo.Gravame
+        ],
+        "Adaptadores Veículos": [
+          ExDatacube.Veiculos.Adaptores.Default,
+          ExDatacube.Veiculos.Adaptores.Stub
+        ],
+        "API Genérica": [
+          ExDatacube.API
+        ],
+        "Tipos Genérica": [
+          ExDatacube.API.Resposta
+        ]
+      ]
     ]
   end
+
+  defp group_for_function(group), do: {String.to_atom(group), &(&1[:group] == group)}
 
   # Aliases are shortcuts or tasks specific to the current project.
   # For example, to install project dependencies and perform other setup tasks, run:

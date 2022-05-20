@@ -37,3 +37,9 @@ ex_datacube-*.tar
 # Dialyzer
 /priv/plts/*.plt
 /priv/plts/*.plt.hash
+
+# Examples
+/priv/examples/teste-api-datacube
+
+# MacOS file system
+.DS_Store
