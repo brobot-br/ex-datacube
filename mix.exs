@@ -87,6 +87,7 @@ defmodule ExDatacube.MixProject do
           ExDatacube.Veiculos.Veiculo.Boolean,
           ExDatacube.Veiculos.Veiculo.UF,
           ExDatacube.Veiculos.Veiculo.Renavam,
+          ExDatacube.Veiculos.Veiculo.ComunicadoVenda,
           ExDatacube.Veiculos.Veiculo.FipePossivel,
           ExDatacube.Veiculos.Veiculo.Gravame
         ],
