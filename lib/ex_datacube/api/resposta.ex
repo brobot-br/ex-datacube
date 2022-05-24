@@ -14,12 +14,13 @@ defmodule ExDatacube.API.Resposta do
   @type status :: boolean()
 
   @typedoc """
-  Mensagem de erro da API consultadeveiculos quando status: `false`
+  Mensagem de erro da API quando status: `false`
   """
   @type error_message :: String.t()
 
   @type t :: %__MODULE__{
           status: boolean(),
+          http_code: pos_integer(),
           result: map(),
           paid: boolean(),
           msg: error_message(),
@@ -31,6 +32,7 @@ defmodule ExDatacube.API.Resposta do
   @derive Jason.Encoder
   embedded_schema do
     field :status, :boolean
+    field :http_code, :integer
     field :result, :map
     field :paid, :boolean
     field :msg, :string
@@ -43,6 +45,7 @@ defmodule ExDatacube.API.Resposta do
     |> cast(params, __schema__(:fields))
   end
 
+  @spec new(map) :: {:ok, t()} | {:error, Ecto.Changeset.t()}
   def new(%{} = params) do
     %__MODULE__{}
     |> changeset(params)
