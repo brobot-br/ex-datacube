@@ -8,6 +8,7 @@ defmodule ExDatacube.Veiculos.Veiculo do
   alias ExDatacube.Veiculos.Veiculo.{
     Ano,
     Boolean,
+    ComunicadoVenda,
     FipePossivel,
     Gravame,
     Renavam,
@@ -55,7 +56,8 @@ defmodule ExDatacube.Veiculos.Veiculo do
           fipe_possivel: [FipePossivel.t()] | nil,
           restricoes: [restricao] | nil,
           gravames: Gravame.t() | nil,
-          intencao_gravame: Gravame.t() | nil
+          intencao_gravame: Gravame.t() | nil,
+          comunicado_venda: ComunicadoVenda.t() | nil
         }
 
   @primary_key false
@@ -89,6 +91,7 @@ defmodule ExDatacube.Veiculos.Veiculo do
     field :restricoes, {:array, :string}
     embeds_one :gravames, Gravame, on_replace: :update
     embeds_one :intencao_gravame, Gravame, on_replace: :update
+    embeds_one :comunicado_venda, ComunicadoVenda, on_replace: :update
   end
 
   @doc false
@@ -106,6 +109,7 @@ defmodule ExDatacube.Veiculos.Veiculo do
     |> cast_embed(:fipe_possivel)
     |> cast_embed(:gravames)
     |> cast_embed(:intencao_gravame)
+    |> cast_embed(:comunicado_venda)
   end
 
   @doc """
