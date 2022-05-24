@@ -4,6 +4,7 @@ defmodule ExDatacube.Cadastros do
 
   TOOD: Implementar adaptadores.
   """
+
   # @moduledoc since: "0.1.1"
 
   alias ExDatacube.API

@@ -39,6 +39,7 @@ defmodule ExDatacube.Veiculos.Adaptores.Default do
   # private helper
   defp parse_resposta(%Resposta{} = resposta) do
     translated_result = translate_fields(resposta.result)
+
     with {:error, %Ecto.Changeset{} = changeset} <- Veiculo.new(translated_result) do
       errors = Ecto.Changeset.traverse_errors(changeset, fn {msg, _} -> msg end)
       {:error, {:internal_server_error, "Resposta do servidor inválida: #{inspect(errors)}"}}

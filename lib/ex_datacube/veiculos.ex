@@ -23,7 +23,6 @@ defmodule ExDatacube.Veiculos do
   @callback consulta_nacional_simples_v2(placa, ExDatacube.shared_opts()) ::
               {:ok, Veiculo.t()} | {:error, API.error()}
 
-
   @doc """
   Retorna resultado da busca de veículos completa.
   """
