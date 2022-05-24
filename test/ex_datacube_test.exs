@@ -1,8 +1,10 @@
 defmodule ExDatacubeTest do
+  @moduledoc false
+
   use ExUnit.Case
   doctest ExDatacube
 
-  test "greets the world" do
-    assert ExDatacube.hello() == :world
+  test "to be defined" do
+    assert true
   end
 end
