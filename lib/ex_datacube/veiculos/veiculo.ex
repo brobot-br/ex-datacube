@@ -8,10 +8,12 @@ defmodule ExDatacube.Veiculos.Veiculo do
   alias ExDatacube.Veiculos.Veiculo.{
     Ano,
     Boolean,
+    BRDate,
     ComunicadoVenda,
     FipePossivel,
     Gravame,
     Renavam,
+    Stringable,
     UF
   }
 
@@ -37,9 +39,9 @@ defmodule ExDatacube.Veiculos.Veiculo do
           proprietario: String.t() | nil,
           proprietario_anterior: String.t() | nil,
           proprietario_documento: cpf() | cnpj() | nil,
-          ano_fabricacao: ano(),
-          ano_modelo: ano(),
-          importado: Boolean.t(),
+          ano_fabricacao: ano() | nil,
+          ano_modelo: ano() | nil,
+          importado: boolean() | nil,
           marca: String.t() | nil,
           cor: String.t() | nil,
           modelo: String.t() | nil,
@@ -65,12 +67,12 @@ defmodule ExDatacube.Veiculos.Veiculo do
   embedded_schema do
     field :placa, :string
     field :renavam, Renavam
-    field :chassi, :string
+    field :chassi, Stringable
     field :uf, UF
     field :municipio, :string
     field :proprietario, :string
     field :proprietario_anterior, :string
-    field :proprietario_documento, :string
+    field :proprietario_documento, Stringable
     field :ano_fabricacao, Ano
     field :ano_modelo, Ano
     field :importado, Boolean
@@ -79,13 +81,13 @@ defmodule ExDatacube.Veiculos.Veiculo do
     field :modelo, :string
     field :tipo, :string
     field :categoria, :string
-    field :capacidade_carga, :string
-    field :cilindradas, :string
-    field :potencia, :string
-    field :eixos, :string
-    field :cmt, :string
-    field :combustivel, :string
-    field :data_ultimo_licenciamento, :date
+    field :capacidade_carga, Stringable
+    field :cilindradas, Stringable
+    field :potencia, Stringable
+    field :eixos, Stringable
+    field :cmt, Stringable
+    field :combustivel, Stringable
+    field :data_ultimo_licenciamento, BRDate
     field :exercicio_ultimo_licenciamento, Ano
     embeds_many :fipe_possivel, FipePossivel, on_replace: :delete
     field :restricoes, {:array, :string}
