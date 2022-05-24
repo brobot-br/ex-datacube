@@ -1,6 +1,12 @@
 # Changelog
 
-## v0.3.0 (2022-05-18)
+## v0.3.1 (2022-05-24)
+
+### Bug Fixes
+
+- campos numéricos e de datas em `ExDatacube.Veiculos.Veiculo` não estavam sendo propriamente convertidos para `String.t()` ou `Date.t()`.
+
+## v0.3.0 (2022-05-24)
 
 ### Enhancements
 
