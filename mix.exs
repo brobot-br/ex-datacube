@@ -70,6 +70,8 @@ defmodule ExDatacube.MixProject do
       source_ref: "v#{@version}",
       source_url: @repo_url,
       main: @name,
+      extra_section: "CHANGELOG",
+      extras: extras(),
       groups_for_functions: [
         group_for_function("API Veículos"),
         group_for_function("API CNH"),
@@ -104,6 +106,12 @@ defmodule ExDatacube.MixProject do
   end
 
   defp group_for_function(group), do: {String.to_atom(group), &(&1[:group] == group)}
+
+  defp extras do
+    [
+      "CHANGELOG.md"
+    ]
+  end
 
   # Aliases are shortcuts or tasks specific to the current project.
   # For example, to install project dependencies and perform other setup tasks, run:
