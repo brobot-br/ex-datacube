@@ -1,12 +1,13 @@
 defmodule ExDatacube.Veiculos.Veiculo.Boolean do
-  @moduledoc """
-  Representa um booleano. Converte `falsey` e `truthy` para
-  booleanos com exceção de 0 que é convertido para falso.
-  """
+  @moduledoc false
   @moduledoc since: "0.2.0"
 
   @behaviour Ecto.Type
 
+  @typedoc """
+  Representa um booleano. Converte `falsey` e `truthy` para
+  booleanos com exceção de 0 que é convertido para falso.
+  """
   @type t :: boolean()
 
   @impl Ecto.Type

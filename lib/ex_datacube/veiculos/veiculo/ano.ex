@@ -1,12 +1,13 @@
 defmodule ExDatacube.Veiculos.Veiculo.Ano do
-  @moduledoc """
-  Representa um ano. Inclui funções de validação e limpeza
-  além de implementar o behaviour `Ecto.Type`.
-  """
+  @moduledoc false
   @moduledoc since: "0.2.0"
 
   @behaviour Ecto.Type
 
+  @typedoc """
+  Representa um ano. Inclui funções de validação e limpeza
+  além de implementar o behaviour `Ecto.Type`.
+  """
   @type t :: String.t()
 
   @impl Ecto.Type

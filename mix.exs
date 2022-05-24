@@ -83,8 +83,6 @@ defmodule ExDatacube.MixProject do
         ],
         "Tipos Veículos": [
           ExDatacube.Veiculos.Veiculo,
-          ExDatacube.Veiculos.Veiculo.Ano,
-          ExDatacube.Veiculos.Veiculo.Boolean,
           ExDatacube.Veiculos.Veiculo.UF,
           ExDatacube.Veiculos.Veiculo.Renavam,
           ExDatacube.Veiculos.Veiculo.ComunicadoVenda,
