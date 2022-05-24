@@ -7,6 +7,8 @@ defmodule ExDatacube.CNH do
 
   # @moduledoc since: "0.1.1"
 
+  alias ExDatacube.API
+
   @typedoc """
   CPF do motorista
   """
@@ -16,5 +18,5 @@ defmodule ExDatacube.CNH do
   Retorna CNH de motorista da base nacional.
   """
   @callback consulta_nacional_cnh(cpf, ExDatacube.shared_opts()) ::
-              {:ok, map()} | ExDatacube.authentication_error() | ExDatacube.unexpected_error()
+              {:ok, map()} | {:error, API.error()}
 end

@@ -4,8 +4,9 @@ defmodule ExDatacube.Cadastros do
 
   TOOD: Implementar adaptadores.
   """
-
   # @moduledoc since: "0.1.1"
+
+  alias ExDatacube.API
 
   @typedoc """
   CNPJ da empresa
@@ -16,5 +17,5 @@ defmodule ExDatacube.Cadastros do
   Retorna resultado da busca de veículos simplificada
   """
   @callback consulta_dados_cnpj(cnpj, ExDatacube.shared_opts()) ::
-              {:ok, map()} | ExDatacube.authentication_error() | ExDatacube.unexpected_error()
+              {:ok, map()} | {:error, API.error()}
 end

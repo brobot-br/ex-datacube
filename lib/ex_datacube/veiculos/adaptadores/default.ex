@@ -20,9 +20,9 @@ defmodule ExDatacube.Veiculos.Adaptores.Default do
     path = "veiculos/informacao-simples-v2"
     opts = Keyword.update(opts, :receive_timeout, :timer.minutes(1), & &1)
 
-    path
-    |> API.post(params, opts)
-    |> parse_results(%{path: path, params: params})
+    with {:ok, resposta} <- API.post(path, params, opts) do
+      parse_resposta(resposta)
+    end
   end
 
   @impl Veiculos
@@ -31,42 +31,16 @@ defmodule ExDatacube.Veiculos.Adaptores.Default do
     path = "veiculos/informacao-completa"
     opts = Keyword.update(opts, :receive_timeout, :timer.minutes(1), & &1)
 
-    path
-    |> API.post(params, opts)
-    |> parse_results(%{path: path, params: params})
-  end
-
-  # private helpers
-  defp parse_results({:ok, %Resposta{status: true} = resposta}, context) do
-    with {:error, changeset} <- Veiculo.new(resposta.result) do
-      errors = Ecto.Changeset.traverse_errors(changeset, fn {msg, _} -> msg end)
-      log_message(context, "#{inspect(errors)}")
-
-      {:error, :unexpected_error}
+    with {:ok, resposta} <- API.post(path, params, opts) do
+      parse_resposta(resposta)
     end
   end
 
-  defp parse_results({:ok, %Resposta{status: false, code: code}}, _context)
-       when code in [2, 26, 96, 764] do
-    {:error, :unauthenticated}
-  end
-
-  defp parse_results({:ok, response}, context) do
-    log_message(context, "#{inspect(response)}")
-    {:error, :unexpected_error}
-  end
-
-  defp parse_results({:error, {:resposta_invalida, errors}}, context) do
-    log_message(context, "#{inspect(errors)}")
-    {:error, :unexpected_error}
-  end
-
-  defp parse_results({:error, error}, context) do
-    log_message(context, "#{inspect(error)}")
-    {:error, :unexpected_error}
-  end
-
-  defp log_message(context, message) do
-    Logger.error(["Error requesting: ", "#{inspect(context)}", ":\n", message])
+  # private helper
+  defp parse_resposta(%Resposta{} = resposta) do
+    with {:error, %Ecto.Changeset{} = changeset} <- Veiculo.new(resposta.result) do
+      errors = Ecto.Changeset.traverse_errors(changeset, fn {msg, _} -> msg end)
+      {:error, {:internal_server_error, "Resposta do servidor inválida: #{inspect(errors)}"}}
+    end
   end
 end

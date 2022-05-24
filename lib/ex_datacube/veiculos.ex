@@ -4,6 +4,7 @@ defmodule ExDatacube.Veiculos do
   """
   @moduledoc since: "0.1.1"
 
+  alias ExDatacube.API
   alias ExDatacube.Veiculos.Veiculo
 
   @typedoc """
@@ -20,15 +21,12 @@ defmodule ExDatacube.Veiculos do
   Retorna resultado da busca de veículos simplificada
   """
   @callback consulta_nacional_simples_v2(placa, ExDatacube.shared_opts()) ::
-              {:ok, Veiculo.t()}
-              | ExDatacube.authentication_error()
-              | ExDatacube.unexpected_error()
+              {:ok, Veiculo.t()} | {:error, API.error()}
+
 
   @doc """
   Retorna resultado da busca de veículos completa.
   """
   @callback consulta_nacional_completa(placa, ExDatacube.shared_opts()) ::
-              {:ok, Veiculo.t()}
-              | ExDatacube.authentication_error()
-              | ExDatacube.unexpected_error()
+              {:ok, Veiculo.t()} | {:error, API.error()}
 end

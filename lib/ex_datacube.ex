@@ -36,11 +36,9 @@ defmodule ExDatacube do
   """
   @moduledoc since: "0.1.0"
 
-  alias ExDatacube.{Veiculos, CNH, Cadastros}
+  alias ExDatacube.API
+  alias ExDatacube.{Cadastros, CNH, Veiculos}
   alias ExDatacube.Veiculos.Veiculo
-
-  @type authentication_error :: {:error, :unauthenticated}
-  @type unexpected_error :: {:error, :unexpected_error}
 
   @type shared_opts :: [
           {:adaptador, module()},
@@ -64,7 +62,7 @@ defmodule ExDatacube do
   @doc group: "API Veículos"
   @doc since: "0.2.0"
   @spec consulta_nacional_simples_v2(Veiculos.placa(), shared_opts()) ::
-          {:ok, Veiculo.t()} | authentication_error() | unexpected_error()
+          {:ok, Veiculo.t()} | {:error, API.error()}
   def consulta_nacional_simples_v2(placa, opts \\ []) do
     {adaptador, opts} =
       opts
@@ -88,7 +86,7 @@ defmodule ExDatacube do
 
   """
   @spec consulta_nacional_completa(Veiculos.placa(), shared_opts()) ::
-          {:ok, Veiculo.t()} | authentication_error() | unexpected_error()
+          {:ok, Veiculo.t()} | {:error, API.error()}
   @doc group: "API Veículos"
   @doc since: "0.2.0"
   def consulta_nacional_completa(placa, opts \\ []) do
@@ -113,7 +111,7 @@ defmodule ExDatacube do
 
   """
   @spec consulta_nacional_cnh(CNH.cpf(), shared_opts()) ::
-          {:ok, map()} | authentication_error() | unexpected_error()
+          {:ok, map()} | {:error, API.error()}
   @doc group: "API CNH"
   @doc since: "0.2.0"
   def consulta_nacional_cnh(cpf, opts \\ []) do
@@ -142,7 +140,7 @@ defmodule ExDatacube do
 
   """
   @spec consulta_dados_cnpj(Cadastros.cnpj(), shared_opts()) ::
-          {:ok, map()} | authentication_error() | unexpected_error()
+          {:ok, map()} | {:error, API.error()}
   @doc group: "API Cadastros"
   @doc since: "0.2.0"
   def consulta_dados_cnpj(cnpj, opts \\ []) do

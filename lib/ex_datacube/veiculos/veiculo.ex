@@ -92,7 +92,7 @@ defmodule ExDatacube.Veiculos.Veiculo do
   end
 
   @doc false
-  def empty_values(),
+  def empty_values,
     do: [
       "nao constam informacoes na base consultada",
       "NAO CONSTAM INFORMACOES NA BASE CONSULTADA",
@@ -111,7 +111,7 @@ defmodule ExDatacube.Veiculos.Veiculo do
   @doc """
   Cria um novo veículo a partir dos `params` fornecidos.
   """
-  @spec new(params :: map) :: t()
+  @spec new(params :: map) :: {:ok, t()} | {:error, Ecto.Changeset.t()}
   def new(params) do
     %__MODULE__{}
     |> changeset(params)
