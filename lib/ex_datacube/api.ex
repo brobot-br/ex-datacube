@@ -76,7 +76,8 @@ defmodule ExDatacube.API do
         auth_token: "XXX"
       )
   """
-  @spec post(path :: String.t(), body :: map | String.t(), opts) :: {:ok, Resposta.t()} | {:error, error}
+  @spec post(path :: String.t(), body :: map | String.t(), opts) ::
+          {:ok, Resposta.t()} | {:error, error}
   def post(path, %{} = params, opts \\ []) do
     with {:ok, response} <- do_post(path, params, opts),
          body = decode_body(response.body, opts),
