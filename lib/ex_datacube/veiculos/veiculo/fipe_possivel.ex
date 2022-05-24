@@ -11,8 +11,8 @@ defmodule ExDatacube.Veiculos.Veiculo.FipePossivel do
 
   @type t :: %__MODULE__{
           referencia: String.t(),
-          ano: Ano.t(),
-          ano_modelo: Ano.t(),
+          ano: Veiculo.ano(),
+          ano_modelo: Veiculo.ano(),
           tipo_veiculo: String.t(),
           marca: String.t(),
           modelo: String.t(),
