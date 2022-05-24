@@ -36,6 +36,15 @@ defmodule ExDatacube.Veiculos.Adaptores.Stub do
       data_ultimo_licenciamento: nil,
       eixos: nil,
       exercicio_ultimo_licenciamento: nil,
+      comunicado_venda: %Veiculo.ComunicadoVenda{
+        data_inclusao: nil,
+        data_venda: nil,
+        documento: nil,
+        nota_fiscal: nil,
+        protocolo_detran: nil,
+        situacao: "Não Consta Comunicação de Vendas",
+        tipo_comprador: nil
+      },
       fipe_possivel: [
         %Veiculo.FipePossivel{
           ano: "2014",
