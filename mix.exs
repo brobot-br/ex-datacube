@@ -60,9 +60,7 @@ defmodule ExDatacube.MixProject do
   def package do
     [
       licenses: ["MIT"],
-      links: %{"GitHub" => @repo_url},
-      files:
-        ~w(lib .formatter.exs mix.exs README* readme* LICENSE* license* CHANGELOG* changelog*)
+      links: %{"GitHub" => @repo_url}
     ]
   end
 
