@@ -4,7 +4,7 @@ defmodule ExDatacube.MixProject do
   use Mix.Project
 
   @name "ExDatacube"
-  @version "0.3.1"
+  @version "0.3.2"
   @repo_url "https://github.com/y86/ex-datacube"
 
   def project do

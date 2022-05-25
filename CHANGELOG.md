@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.2 (2022-05-25)
+
+### Bug Fixes
+
+- campo `proprietario` na pesquisa_simples_v2 não estavam sendo carregados corretamente em função de divergências nos nomes retornados pela api;
+
 ## v0.3.1 (2022-05-24)
 
 ### Bug Fixes
