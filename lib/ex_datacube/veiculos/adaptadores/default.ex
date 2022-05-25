@@ -46,25 +46,22 @@ defmodule ExDatacube.Veiculos.Adaptores.Default do
     end
   end
 
-  defp translate_fields(%{"ano_fab" => ano_fab} = result) do
-    result
-    |> Map.put("ano_fabricacao", ano_fab)
-    |> Map.drop(["ano_fab"])
-    |> translate_fields
-  end
-
-  defp translate_fields(%{"cor_veiculo" => cor_veiculo} = result) do
-    result
-    |> Map.put("cor", cor_veiculo)
-    |> Map.drop(["cor_veiculo"])
-    |> translate_fields
-  end
-
-  defp translate_fields(%{"municipio_emplacamento" => municipio_emplacamento} = result) do
-    result
-    |> Map.put("municipio", municipio_emplacamento)
-    |> Map.drop(["municipio_emplacamento"])
-    |> translate_fields
+  # não consistência de nomeclatura dos campos em consultas distintas. Na consulta
+  # nacional completa, a cor do veículo retorna como `cor` e na simples como `cor_veiculo`.
+  # a função abaixo padroniza os nomes para a definição no tipo `Veiculo`.
+  @from_to [
+    {"ano_fab", "ano_fabricacao"},
+    {"cor_veiculo", "cor"},
+    {"municipio_emplacamento", "municipio"},
+    {"proprietario_nome", "proprietario"}
+  ]
+  for {from, to} <- @from_to do
+    defp translate_fields(%{unquote(from) => from_value} = result) do
+      result
+      |> Map.put(unquote(to), from_value)
+      |> Map.drop([unquote(from)])
+      |> translate_fields
+    end
   end
 
   defp translate_fields(%{} = result), do: result
