@@ -23,7 +23,11 @@ defmodule ExDatacube do
         adaptador: ExDatacube.Veiculos.Adaptores.Default
     ```
 
-    * `:auth_token` — token de autenticação à API.
+    * `:auth_token` — token de autenticação à API, que pode ser fornecido de
+    três maneiras, seguindo a seguinte precedência:
+      - nas opções de qualquer chamada;
+      - configuração global no contexto da api (`config :ex_datacube, API, ...`);
+      - configuração global (`config :ex_datacube, ...`).
 
     * `:adaptador` — Adaptador a ser utilizado nas chamadas. Por padrão, o
     adaptador usado é o `ModuloAPI.Adaptores.Default` que comunica-se
