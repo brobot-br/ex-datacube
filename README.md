@@ -4,18 +4,19 @@
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `ex_datacube` to your list of dependencies in `mix.exs`:
+Full documentation can be found at Documentation can be found at <https://hexdocs.pm/ex_datacube>.
+
+The package can be installed by adding `ex_datacube` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:ex_datacube, "~> 0.3.1"}
+    {:ex_datacube, "~> 0.3.2"}
   ]
 end
 ```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/ex_datacube>.
-
+and your `auth_token` can be provided by adding this to your `config.exs`:
+```elixir
+config :ex_datacube, auth_token: "token"
+```
+For other ways to  configure the library, please check the [docs](https://hexdocs.pm/ex_datacube).
