@@ -4,7 +4,7 @@
 
 ## Installation
 
-Full documentation can be found at Documentation can be found at <https://hexdocs.pm/ex_datacube>.
+Full documentation can be found at <https://hexdocs.pm/ex_datacube>.
 
 The package can be installed by adding `ex_datacube` to your list of dependencies in `mix.exs`:
 
