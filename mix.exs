@@ -24,7 +24,7 @@ defmodule ExDatacube.MixProject do
       dialyzer: [
         ignore_warnings: ".dialyzer_ignore.exs",
         plt_file: {:no_warn, "priv/plts/dialyzer.plt"},
-        flags: [:error_handling, :race_conditions, :unknown],
+        flags: [:error_handling, :unknown],
         # Error out when an ignore rule is no longer useful so we can remove it
         list_unused_filters: true,
         plt_add_apps: [:jason]
