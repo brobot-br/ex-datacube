@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.4.0 (2022-12-07)
+
+### Enhancements
+- novos endpoints para consultas de veículos adicionados: `consulta_nacional_simples_v3` e `consulta_nacional_agregados` presentes na versão `V2.9.9.94` da api do Datacube;
+
 ## v0.3.2 (2022-05-25)
 
 ### Bug Fixes

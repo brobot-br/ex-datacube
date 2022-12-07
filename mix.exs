@@ -4,8 +4,8 @@ defmodule ExDatacube.MixProject do
   use Mix.Project
 
   @name "ExDatacube"
-  @version "0.3.2"
-  @repo_url "https://github.com/y86/ex-datacube"
+  @version "0.4.0"
+  @repo_url "https://github.com/brobot-br/ex-datacube"
 
   def project do
     [
@@ -61,8 +61,7 @@ defmodule ExDatacube.MixProject do
     [
       licenses: ["MIT"],
       links: %{"GitHub" => @repo_url},
-      files:
-        ~w(lib .formatter.exs mix.exs README* LICENSE* CHANGELOG*)
+      files: ~w(lib .formatter.exs mix.exs README* LICENSE* CHANGELOG*)
     ]
   end
 
