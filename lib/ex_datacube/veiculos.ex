@@ -24,6 +24,20 @@ defmodule ExDatacube.Veiculos do
               {:ok, Veiculo.t()} | {:error, API.error()}
 
   @doc """
+  Retorna resultado da busca de veículos simplificada V3 (sem informação de proprietário)
+  """
+  @callback consulta_nacional_simples_v3(placa, ExDatacube.shared_opts()) ::
+              {:ok, Veiculo.t()} | {:error, API.error()}
+
+  @doc """
+  Retorna resultado da busca de veículos simplificada (sem proprietário) e mais
+  em conta, no entanto há a possibilidade da informação de Renavam não retornar
+  na consulta.
+  """
+  @callback consulta_nacional_agregados(placa, ExDatacube.shared_opts()) ::
+              {:ok, Veiculo.t()} | {:error, API.error()}
+
+  @doc """
   Retorna resultado da busca de veículos completa.
   """
   @callback consulta_nacional_completa(placa, ExDatacube.shared_opts()) ::

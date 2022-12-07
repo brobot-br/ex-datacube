@@ -52,6 +52,8 @@ defmodule ExDatacube do
 
   @doc """
   Retorna resultado da busca de veículos simplificada v2.
+  Nesta consulta temos informação de renavam, chassi, proprietário e
+  dados cadastrais do veículo.
 
   ## Options
   Veja a seção ["Opções compartilhadas"](#module-opções-compartilhadas) na
@@ -74,6 +76,35 @@ defmodule ExDatacube do
       |> Keyword.pop(:adaptador, Module.concat(Veiculos, Adaptadores.Default))
 
     adaptador.consulta_nacional_simples_v2(placa, opts)
+  end
+
+  @doc """
+  Retorna resultado da busca de veículos simplificada v3.
+  Nesta consulta temos informação de renavam, chassi e dados cadastrais do veículo.
+
+  *Não há informação de proprietário nesta consulta*
+
+  ## Options
+  Veja a seção ["Opções compartilhadas"](#module-opções-compartilhadas) na
+  documentação do módulo para as opções possíveis.
+
+  ## Exemplo
+
+      {:ok, %Veiculo{} = veiculo} =
+        ExDatacube.consulta_nacional_simples_v3("FLT9034")
+
+  """
+  @doc group: "API Veículos"
+  @doc since: "0.4.0"
+  @spec consulta_nacional_simples_v3(Veiculos.placa(), shared_opts()) ::
+          {:ok, Veiculo.t()} | {:error, API.error()}
+  def consulta_nacional_simples_v3(placa, opts \\ []) do
+    {adaptador, opts} =
+      opts
+      |> merge_config(Veiculos)
+      |> Keyword.pop(:adaptador, Module.concat(Veiculos, Adaptadores.Default))
+
+    adaptador.consulta_nacional_simples_v3(placa, opts)
   end
 
   @doc """
@@ -100,6 +131,36 @@ defmodule ExDatacube do
       |> Keyword.pop(:adaptador, Module.concat(Veiculos, Adaptadores.Default))
 
     adaptador.consulta_nacional_completa(placa, opts)
+  end
+
+  @doc """
+  Retorna resultado da busca de veículos no endpoint agregados.
+
+  Este endpoint retorna as mesmas informações da simples v3 (praticamente)
+  mas não possui abrangência para toda base de veículos. **Logo, há certas
+  consultas que não retornaram a informação de renavam.**
+
+  ## Options
+  Veja a seção ["Opções compartilhadas"](#module-opções-compartilhadas) na
+  documentação do módulo para as opções possíveis.
+
+  ## Exemplo
+
+      {:ok, %ExDataCube.Veiculos.Veiculo{} = veiculo} =
+        ExDatacube.consulta_nacional_agregados("FLT9034")
+
+  """
+  @spec consulta_nacional_agregados(Veiculos.placa(), shared_opts()) ::
+          {:ok, Veiculo.t()} | {:error, API.error()}
+  @doc group: "API Veículos"
+  @doc since: "0.4.0"
+  def consulta_nacional_agregados(placa, opts \\ []) do
+    {adaptador, opts} =
+      opts
+      |> merge_config(Veiculos)
+      |> Keyword.pop(:adaptador, Module.concat(Veiculos, Adaptadores.Default))
+
+    adaptador.consulta_nacional_agregados(placa, opts)
   end
 
   @doc """

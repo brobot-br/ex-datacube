@@ -26,9 +26,31 @@ defmodule ExDatacube.Veiculos.Adaptores.Default do
   end
 
   @impl Veiculos
+  def consulta_nacional_simples_v3(placa, opts) do
+    params = %{placa: placa}
+    path = "veiculos/informacao-simples-v3"
+    opts = Keyword.update(opts, :receive_timeout, :timer.minutes(1), & &1)
+
+    with {:ok, resposta} <- API.post(path, params, opts) do
+      parse_resposta(resposta)
+    end
+  end
+
+  @impl Veiculos
   def consulta_nacional_completa(placa, opts) do
     params = %{placa: placa}
     path = "veiculos/informacao-completa"
+    opts = Keyword.update(opts, :receive_timeout, :timer.minutes(1), & &1)
+
+    with {:ok, resposta} <- API.post(path, params, opts) do
+      parse_resposta(resposta)
+    end
+  end
+
+  @impl Veiculos
+  def consulta_nacional_agregados(placa, opts) do
+    params = %{placa: placa}
+    path = "veiculos/agregados"
     opts = Keyword.update(opts, :receive_timeout, :timer.minutes(1), & &1)
 
     with {:ok, resposta} <- API.post(path, params, opts) do
@@ -50,10 +72,16 @@ defmodule ExDatacube.Veiculos.Adaptores.Default do
   # nacional completa, a cor do veículo retorna como `cor` e na simples como `cor_veiculo`.
   # a função abaixo padroniza os nomes para a definição no tipo `Veiculo`.
   @from_to [
+    {"uf_jurisdicao", "uf"},
+    {"municipio_emplacamento", "municipio"},
+    {"cidade", "municipio"},
     {"ano_fab", "ano_fabricacao"},
     {"cor_veiculo", "cor"},
-    {"municipio_emplacamento", "municipio"},
-    {"proprietario_nome", "proprietario"}
+    {"proprietario_nome", "proprietario"},
+    {"tipo_veiculo", "tipo"},
+    {"nacionalidade", "importado"},
+    {"quantidade_eixo", "eixos"},
+    {"carga", "capacidade_carga"}
   ]
   for {from, to} <- @from_to do
     defp translate_fields(%{unquote(from) => from_value} = result) do
